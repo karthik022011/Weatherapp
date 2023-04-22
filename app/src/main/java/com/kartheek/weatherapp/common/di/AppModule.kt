@@ -1,11 +1,14 @@
 package com.kartheek.weatherapp.common.di
 
+import android.content.Context
 import com.kartheek.weatherapp.BuildConfig
 import com.kartheek.weatherapp.data.networking.ApiService
 import com.kartheek.weatherapp.common.utils.MyAppConstants
+import com.kartheek.weatherapp.common.datastore.MyDataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -49,6 +52,11 @@ object AppModule {
     @Provides
     fun provideApiService(retrofit:Retrofit) : ApiService{
         return retrofit.create(ApiService::class.java)
+    }
+    @Singleton
+    @Provides
+    fun  provideMyDataStore(@ApplicationContext appContext: Context): MyDataStore {
+        return MyDataStore(appContext)
     }
 
 }

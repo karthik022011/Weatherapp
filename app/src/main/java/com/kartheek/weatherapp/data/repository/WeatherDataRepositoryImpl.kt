@@ -15,9 +15,9 @@ class WeatherDataRepositoryImpl @Inject constructor(
     private val apiService : ApiService
 ) : WeatherDataRepository, BaseApiResponse() {
 
-    override suspend fun getWeatherData(): Flow<NetworkResult<WeatherRes>> {
+    override suspend fun getWeatherData(cityName:String): Flow<NetworkResult<WeatherRes>> {
         return flow<NetworkResult<WeatherRes>> {
-            emit(safeApiCall { apiService.getWeather() })
+            emit(safeApiCall { apiService.getWeatherWithCityName(cityName) })
         }.flowOn(Dispatchers.IO)
 
     }

@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface WeatherDataRepository {
 
-  suspend fun getWeatherData(): Flow<NetworkResult<WeatherRes>>
+  suspend fun getWeatherData(cityName:String): Flow<NetworkResult<WeatherRes>>
 
 }
