@@ -78,8 +78,9 @@ class WeatherViewModel @Inject constructor(
 
     fun autoLoadWeather(){
         try {
+            isCitySearched = true
             viewModelScope.launch {
-                if(getLastCityNameSearched().isEmpty()){
+                if(getLastCityNameSearched().isNotEmpty()){
                     _uiState.value = NetworkResult.Loading()
                     weatherRepository.getWeatherData(getLastCityNameSearched())
                         .flowOn(Dispatchers.IO)

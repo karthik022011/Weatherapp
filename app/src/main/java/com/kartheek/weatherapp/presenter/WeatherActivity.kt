@@ -95,11 +95,7 @@ class WeatherActivity : ComponentActivity() {
         initLocalRequest()
         checkPermission()
     }
-
-    override fun onResume() {
-        super.onResume()
-        showToast(viewModel.getLastCityNameSearched())
-    }
+    
 
     fun initLocalRequest(){
         locationRequest = LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 10*10000)
