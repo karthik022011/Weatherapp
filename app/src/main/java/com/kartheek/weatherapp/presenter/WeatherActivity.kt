@@ -3,20 +3,17 @@ package com.kartheek.weatherapp.presenter
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.IntentSender
-import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
-import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import androidx.activity.ComponentActivity
-import androidx.activity.viewModels
 import androidx.activity.compose.setContent
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
@@ -25,10 +22,11 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.Task
+import com.kartheek.weatherapp.common.hasPermission
+import com.kartheek.weatherapp.common.isLocationEnabled
 import com.kartheek.weatherapp.common.showToast
 import com.kartheek.weatherapp.theme.WeatherAppTheme
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class WeatherActivity : ComponentActivity() {
@@ -160,20 +158,7 @@ class WeatherActivity : ComponentActivity() {
         }
     }
 
-    private fun hasPermission(): Boolean {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED &&
-            ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            return true
-        }
-        return false
-    }
+
 
     private fun shouldShowRationale():Boolean{
         return ActivityCompat.shouldShowRequestPermissionRationale(
@@ -192,11 +177,7 @@ class WeatherActivity : ComponentActivity() {
      ))
     }
 
-    fun isLocationEnabled():Boolean{
-        val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return lm.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-    }
+
 
     fun requestDeviceLocationSettings(){
         val builder = LocationSettingsRequest.Builder()
