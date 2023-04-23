@@ -1,10 +1,21 @@
 # Weatherapp
 
-Libraries Used
-Retrofit 
-Flow
+Libraries 📚
+
+Retrofit
+
 Location
+
 ViewModel
-MVVM
-Coil
+
+Jetpack Compose
+
+Hilt
+
+Flow
+
+MVVM Architecture
+
 Data Store
+
+Coil
